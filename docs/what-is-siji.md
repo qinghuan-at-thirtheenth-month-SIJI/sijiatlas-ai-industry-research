@@ -1,19 +1,16 @@
 # What is SIJI?
 
-SIJI is an evidence-oriented AI-industry and supply-chain research system.
+SIJI is AI-industry intelligence infrastructure for researchers and AI agents.
 
-Its core job is to connect **products, complete supply chains, industry positions, companies, commercial facts, evidence and original sources** while preserving uncertainty and coverage boundaries.
+It connects:
 
-A canonical research path is:
+- companies;
+- products and businesses;
+- industry positions;
+- typed relationships;
+- commercialization and operating facts;
+- evidence states;
+- original-source references;
+- published changes.
 
-```text
-Product
-→ Complete Supply Chain
-→ Industry Position
-→ Company Participation
-→ Commercial Fact
-→ Evidence
-→ Original Source
-```
-
-SIJI is not a stock-rating system, real-time market terminal, unlimited crawler or guarantee of complete world coverage.
+The result is a researchable industry map that can be queried through the SIJI Research API and Agent Graph.

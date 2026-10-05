@@ -1,17 +1,22 @@
 # Evidence & Sources
 
-SIJI treats evidence as a path, not a decorative link.
+SIJI keeps facts and relationships connected to their evidence and source references.
 
-A key assertion should be traceable from a fact or relationship to evidence and then to an original source. A source URL proves only the statement it actually supports.
+A typical path is:
 
-## Evidence rules
+```text
+Fact or relationship
+→ Evidence
+→ Source reference
+→ Original source
+```
 
-- A structural relation cannot prove a direct transaction.
-- Product existence does not automatically prove mass production, orders, delivery, or revenue.
-- A company-level statement cannot silently be copied to every product or business.
-- Evidence status belongs to a specific assertion, not to an entire company as one blanket score.
-- Conflicting, stale, unsupported, or unavailable evidence remains visible as such.
+## Evidence state
 
-## Public examples
+Evidence state belongs to the specific fact or relationship it describes. Common states include `verified`, `review_required`, `conflict`, `stale`, and `not_found`.
 
-Examples in this repository use public source material that can be shown and linked here. Original source contents are not mirrored; the examples preserve source links and relevant SIJI research identities.
+## Source references
+
+A returned source reference may include the source title, URL, date, locator, and the content currently available through the API. Source availability is evaluated per source.
+
+Public examples in this repository link to their original sources so the research path can be reopened independently.

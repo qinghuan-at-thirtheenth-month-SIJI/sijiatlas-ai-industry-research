@@ -1,12 +1,13 @@
 # Global AI Research Questions
 
-Use this route for global AI-industry and supply-chain research.
+Use SIJI to navigate products and companies across the global AI-industry map.
 
 Typical questions:
 
-- Which products or software components occupy a specific AI-infrastructure position?
-- Which companies maintain or provide those products?
-- What original sources support the product/company mapping?
-- What information is missing about deployment, customers, orders, or revenue?
+- Which products occupy a specific AI-infrastructure position?
+- Which companies provide or participate in those products?
+- Which cross-chain relationships connect storage, networking, power, cooling, packaging, memory, training, and inference?
+- What commercial facts and source references are attached to each object?
+- What changed recently?
 
-The examples in this repository demonstrate SIJI's evidence semantics with a small public software/product slice. They do not imply complete global coverage.
+Results can be continued with public Web research using the source references returned by SIJI.

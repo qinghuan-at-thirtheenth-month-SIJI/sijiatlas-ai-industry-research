@@ -1,6 +1,8 @@
 # Commercialization Research Questions
 
-Commercialization is not one score. SIJI keeps stages and operating facts separate:
+SIJI stores commercialization as a set of specific facts that can be queried independently.
+
+Common stages include:
 
 ```text
 R&D / technical reserve
@@ -13,8 +15,11 @@ R&D / technical reserve
 → revenue / operating validation
 ```
 
-The sequence is not assumed to be complete or strictly linear.
+Useful questions:
 
-Do not collapse these distinctions: product exists ≠ mass production; capacity exists ≠ order; mass production ≠ order; order ≠ delivery; delivery ≠ named customer; delivery ≠ revenue.
-
-If the source does not quantify revenue, order size, capacity or shipment, state that operating contribution cannot currently be quantified.
+- What stage has this product reached?
+- What source supports that stage?
+- When did the change happen?
+- Is a capacity figure attached to a specific product, factory, unit, and time period?
+- Are orders, shipments, delivery, and revenue disclosed separately?
+- What later changes updated or superseded the earlier fact?

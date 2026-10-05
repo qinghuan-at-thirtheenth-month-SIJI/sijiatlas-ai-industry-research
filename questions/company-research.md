@@ -1,17 +1,23 @@
 # Company Research Questions
 
-Start here when you know the company and want to place it back into the industry structure.
+Start here when you know the company and want to place it in the industry map.
 
 ```text
 Company
-→ specific Product / Business
+→ Product / Business
 → Industry Position
-→ Complete Supply Chain
 → Commercial Fact
 → Evidence
 → Source
 ```
 
-Typical questions: Which AI products/businesses are actually disclosed? Where does each sit? What participation role is evidenced? What business stage is evidenced? Can operating importance be quantified? Which customer/supplier relations are directly disclosed? What remains unsupported or outside current coverage?
+Typical questions:
 
-Read [the ByteDance → BytePS example](../examples/company-research.md).
+- Which AI products or businesses are associated with the company?
+- Where does each product sit in the industry?
+- What participation role is recorded?
+- What commercialization facts are available?
+- What customers, suppliers, cooperation, capacity, order, shipment, or delivery records are linked?
+- What changed recently?
+
+See [the ByteDance → BytePS example](../examples/company-research.md).

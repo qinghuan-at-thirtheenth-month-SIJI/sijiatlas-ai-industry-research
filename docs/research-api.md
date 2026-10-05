@@ -1,14 +1,6 @@
 # SIJI Agent Graph API
 
-SIJI exposes nine typed research primitives over the maintained industry world model.
-
-The public capability catalog is available at:
-
-```text
-GET /v1/agent/capabilities
-```
-
-## Operations
+SIJI exposes nine typed operations over its maintained AI-industry graph.
 
 | Operation | HTTP path | MCP tool |
 | --- | --- | --- |
@@ -22,30 +14,15 @@ GET /v1/agent/capabilities
 | `get_evidence` | `POST /v1/agent/evidence/get` | `siji_get_evidence` |
 | `compare` | `POST /v1/agent/compare` | `siji_compare` |
 
-## Recommended use
+## Authentication
 
-Broad research should normally begin with `get_world_overview`, so the Agent can understand the visible world before narrowing to familiar keywords.
+Requests use an SIJI API Key. Account usage is measured in Research Units (RU).
 
-Known-entity research can begin directly with `search_entities` or `get_entities`.
+## Continuation
 
-Continue with graph traversal, facts and evidence only as needed. Use public Web sources independently for current events, commercialization timing and market pricing.
-
-## Semantics
-
-The API preserves typed IDs, relationship semantics, evidence/review state, time context, coverage and continuation state.
-
-Important rules:
-
-- partial results are partial, not absence;
-- missing values are unknown, not zero;
-- a graph path is not causal proof;
-- structural adjacency is not a company transaction;
-- evidence metadata and source-content permissions are separate;
-- market pricing is outside the industry-graph conclusion.
+When an operation returns a cursor, continue with the same logical request and the returned cursor. Reuse returned entity, relationship, fact, and source references for subsequent calls.
 
 ## Machine-readable contracts
 
 - [Capability catalog](../api/capabilities.json)
 - [OpenAPI](../api/openapi.json)
-
-A production base URL is only valid when published through an official SIJI channel.

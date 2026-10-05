@@ -1,67 +1,36 @@
 # How SIJI Works
 
-SIJI is designed as an **industry world model for research**, not an answer generator.
+SIJI organizes AI-industry research around stable objects and reusable references.
 
-## Start from the world when the question is broad
-
-For an open-ended question, the useful order is:
-
-```text
-world overview
-→ candidate universe
-→ graph / change / entity drill-down
-→ facts and evidence
-→ public-Web verification
-→ market evidence separately
-```
-
-`get_world_overview` exposes the current visible company/product/business/position identities and typed relationship skeleton. It lets an Agent see the research space before it decides which keywords deserve attention.
-
-For a narrow known-entity question, an Agent may start directly from entity search/get.
-
-## Evidence organization
+## Core path
 
 ```text
 Product / business
 → Industry position
 → Company participation
 → Commercial fact
-→ Evidence reference
+→ Evidence
 → Original source
 ```
 
-## Research derivation
+A researcher can enter at any point in this chain and continue outward.
 
-```text
-industry change
-→ affected product layer
-→ alternative / adjacent / upstream / downstream paths
-→ concrete companies and products
-→ facts and evidence
-→ conditional conclusion
-→ next verification / invalidation signal
-```
+## World overview
 
-The second chain is analytical. A graph path is not automatically causal proof.
+`get_world_overview` returns a lightweight map of the current published industry world. It gives an Agent a broad set of companies, products/businesses, positions, and typed relationships before deeper calls.
 
-## Roles
+## Drill-down
 
-**SIJI** provides stable identity, world structure, typed relationships, commercial facts, evidence state, coverage and source anchors.
+After choosing an object:
 
-**Public Web** provides independent freshness, original-source verification, information outside SIJI coverage, and market evidence.
+- `get_entities` reopens its identity and context;
+- `expand_graph` explores nearby relationships;
+- `trace_paths` finds bounded routes;
+- `get_facts` reads commercial and operating facts;
+- `get_evidence` opens the evidence/source layer;
+- `list_changes` tracks published changes;
+- `compare` aligns selected objects.
 
-**The Agent** decides which branches matter, compares alternatives, preserves uncertainty, and chooses the next verification.
+## Freshness
 
-## Hard boundaries
-
-- structural adjacency ≠ transaction;
-- product existence ≠ qualification;
-- qualification ≠ mass production;
-- mass production ≠ order;
-- order ≠ shipment/delivery;
-- delivery ≠ revenue;
-- nearby product maturity ≠ target product maturity;
-- unknown/partial ≠ non-existence;
-- industry evidence ≠ market-pricing evidence.
-
-See [Agent Guide](agent-guide.md) and the [flagship case](../examples/next-inflection.md).
+SIJI provides a maintained snapshot and published change stream. Public Web sources can extend the research when a newer event falls outside the current snapshot.

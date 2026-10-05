@@ -1,7 +1,10 @@
 {
   "schema_version": "siji.agent-capabilities/v1",
   "data_schema_version": "siji.agent/v1",
-  "principle": "Allow traversal. Meter disclosure. Enforce quota. Detect sustained extraction.",
+  "product": {
+    "name": "SIJI Agent Graph",
+    "description": "Structured AI-industry research over companies, products, positions, relationships, facts, evidence and changes."
+  },
   "entity_types": [
     "company",
     "product",
@@ -15,18 +18,18 @@
     "structure",
     "cross_chain"
   ],
-  "relationship_semantics": "Existing canonical relation codes are preserved; codes do not imply data coverage.",
+  "relationship_semantics": "Relationship codes and evidence states are returned together and should be preserved by clients.",
   "onboarding": {
     "version": "siji.agent-onboarding/v1",
-    "purpose": "Use SIJI as an industry world model that expands the research space and preserves evidence semantics; do not treat it as an answer generator or stock picker.",
+    "purpose": "Use SIJI to explore AI-industry entities, relationships, facts, evidence and published changes.",
     "choose_start": {
       "broad_or_unknown_unknown": {
         "start_with": "get_world_overview",
-        "instruction": "Read the full visible world graph before choosing familiar keywords. Build a broad candidate universe from companies, products/businesses, positions and typed relations, then decide what to verify next."
+        "instruction": "Read the visible industry map, identify relevant product layers and positions, then drill into the branches that matter."
       },
       "known_company_or_product": {
         "start_with": "search_entities",
-        "instruction": "Resolve the exact entity first, then reopen it and drill into graph/facts/evidence as needed."
+        "instruction": "Resolve the entity, reopen it, then follow its relationships, facts and evidence as needed."
       }
     },
     "recommended_loop": [
@@ -38,20 +41,18 @@
       "get_facts",
       "get_evidence",
       "compare_if_needed",
-      "verify_important_branches_on_public_web",
-      "assess_market_expectations_separately"
+      "verify_important_branches_on_public_web"
     ],
     "recipes": {
       "broad_industry_discovery": {
-        "goal": "Find product layers, bottlenecks or inflections without pre-seeding a candidate list.",
+        "goal": "Map relevant product layers, companies, positions and recent changes before narrowing the research scope.",
         "sequence": [
           "get_world_overview",
           "list_changes",
           "expand_graph",
           "get_facts",
           "get_evidence"
-        ],
-        "rule": "Graph density is a discovery signal, not a ranking score."
+        ]
       },
       "known_entity_deep_dive": {
         "goal": "Research a known company, product or business.",
@@ -61,8 +62,7 @@
           "expand_graph",
           "get_facts",
           "get_evidence"
-        ],
-        "rule": "Identity or participation alone does not prove orders, mass production, shipment or revenue."
+        ]
       },
       "commercial_stage_verification": {
         "goal": "Verify sample, qualification, mass production, order, shipment, delivery or revenue claims.",
@@ -70,8 +70,7 @@
           "search_entities",
           "get_facts",
           "get_evidence"
-        ],
-        "rule": "Keep each commercial stage distinct and preserve review/evidence status and time scope."
+        ]
       },
       "multi_hop_propagation_and_compare": {
         "goal": "Trace a change through the industry and compare explicit candidates.",
@@ -82,96 +81,55 @@
           "get_facts",
           "compare",
           "get_evidence"
-        ],
-        "rule": "A graph path is not causal proof; verify important branches and alternatives independently."
+        ]
       }
     },
     "interpretation_rules": [
-      "graph adjacency is not a supplier/customer transaction",
-      "participation is not an order",
-      "product existence is not qualification or mass production",
-      "qualification is not mass production",
-      "mass production is not an order",
-      "order is not shipment or delivery",
-      "delivery is not revenue",
-      "nearby product maturity does not transfer to the target product",
-      "missing or partial results do not prove non-existence",
-      "review_required is not verified",
-      "industry evidence does not prove market underpricing"
+      "Preserve the returned relationship type, evidence state and time scope.",
+      "Treat commercialization stages as separate facts when SIJI returns them separately.",
+      "Keep partial, unknown and conflict states explicit in downstream analysis."
     ],
     "web_boundary": {
       "use_web_for": [
         "latest events beyond the SIJI snapshot",
         "independent original-source verification",
         "commercialization timing and counter-evidence",
-        "market prices, valuation, expectations and crowding"
+        "information outside the current SIJI coverage"
       ],
-      "provenance_rule": "Web findings remain Web provenance until separately processed into SIJI."
+      "provenance_rule": "Keep SIJI results and independently collected Web findings separately attributed."
     },
     "human_docs_path": "/research/docs"
   },
-  "identity": {
-    "position": "existing UUID plus chain_version_id; external_id is not globally unique",
-    "relationship": "Use the full typed relationship_ref returned by the API.",
-    "participation_facets": "subject=company-to-subject; position=subject-to-position in that SAME canonical participation. Neither creates a standalone placement or supplier fact."
+  "references": {
+    "entity": "Reuse the typed entity references returned by SIJI in follow-up calls.",
+    "relationship": "Reuse the full relationship_ref returned by SIJI when reopening an exact relationship."
   },
   "continuation": {
-    "state": "server-side",
-    "binding": "account/session/snapshot/query/projection/algorithm",
-    "research_total_hop_limit": null,
-    "expired_state_resets_disclosure": false
+    "supported": true,
+    "cursor_field": "cursor",
+    "session_field": "session_id"
   },
   "billing": {
-    "owner": "account",
-    "shared_across": [
-      "keys",
-      "sessions",
-      "http",
-      "mcp",
-      "legacy",
-      "browser"
-    ],
-    "work": "RU",
-    "new_content": "DU",
-    "warm_disclosure_discount": false,
-    "quota_exhaustion_is_abuse": false,
-    "risk_mode": "shadow"
+    "unit": "RU",
+    "scope": "account"
   },
   "capabilities": {
-    "arbitrary_sql": false,
-    "arbitrary_cypher": false,
-    "dump_snapshot": false,
-    "lightweight_world_graph": true,
-    "world_overview": "Fixed lightweight world graph exposing current visible company/product/business/position identities and typed participation/company/structure links. Deep facts/evidence/source content stay behind drill-down; no rotating view or overview pagination.",
-    "full_graph_resource": false,
-    "historical_asof": false,
-    "source_full_text": false,
-    "source_excerpts": false,
-    "source_registry_enumeration": false,
-    "canonical_intelligence_delivery": "Current canonical facts, participations, company relationships and structural relations are researchable after the single intake review. Historical evidence/review labels remain visible quality state rather than a second Agent publication gate; explicit withdrawal or denial remains blocked.",
-    "source_delivery": "Sources are citation/evidence references, not an enumerable intelligence corpus; source metadata/content remains permission-filtered.",
-    "changes_object_types": [
-      "fact",
-      "participation"
-    ],
-    "changes_modes": [
-      "discovery",
-      "tracked"
-    ],
-    "path_modes": [
-      "shortest",
-      "diverse",
-      "bounded_all"
-    ],
-    "diversity": "Different node-ID routes plus edge overlap filtering; aliases still require semantic interpretation.",
-    "negative_relation_coverage": "Only existing qualified canonical relations; unsupported/missing relations are not fabricated."
+    "world_overview": true,
+    "entity_resolution": true,
+    "change_tracking": true,
+    "graph_traversal": true,
+    "path_tracing": true,
+    "fact_retrieval": true,
+    "evidence_retrieval": true,
+    "comparison": true,
+    "historical_asof": false
   },
   "operations": [
     {
       "name": "get_world_overview",
       "http_path": "/v1/agent/world/overview",
       "mcp_tool": "siji_get_world_overview",
-      "description": "Orient yourself in the whole published industry network before choosing keywords. Returns visible lightweight company/product/business/position identities and the typed relationship skeleton connecting them, plus category summaries. Fact text, evidence/source bodies and commercial values require drill-down; there is no rotating sample or overview pagination.",
+      "description": "Read the current published industry map: companies, products/businesses, industry positions, typed relationships and category summaries.",
       "input_schema": {
         "$defs": {
           "WorldOverviewBudget": {
@@ -211,7 +169,7 @@
           }
         },
         "additionalProperties": false,
-        "description": "One fixed lightweight graph of a published industry network.\n\nNo entity filters, time slicing, alternate projections, random seeds or\npagination. It may expose visible node identity plus typed relationship\nskeletons, but not deep fact/evidence/source payloads. Repeating this\noperation cannot reveal a rotating sample.",
+        "description": "Return the current published industry map with lightweight typed relationships.",
         "properties": {
           "operation": {
             "const": "get_world_overview",
@@ -396,7 +354,7 @@
       "name": "search_entities",
       "http_path": "/v1/agent/entities/search",
       "mcp_tool": "siji_search_entities",
-      "description": "Resolve names, aliases, tickers or scoped product terms to canonical typed IDs. For unknown research space, get_world_overview gives orientation and list_changes gives recent changes. No wildcard or whole-database listing.",
+      "description": "Resolve names, aliases, tickers, product terms or industry positions to typed SIJI entity references.",
       "input_schema": {
         "$defs": {
           "EntityRef": {
@@ -726,7 +684,7 @@
       "name": "get_entities",
       "http_path": "/v1/agent/entities/get",
       "mcp_tool": "siji_get_entities",
-      "description": "Reopen explicit typed entity references, including existing position UUIDs and chain versions. Identity is not evidence of participation, orders or commercial stage.",
+      "description": "Open previously returned entity references and read their public identity and context.",
       "input_schema": {
         "$defs": {
           "EntityRef": {
@@ -1017,7 +975,7 @@
       "name": "list_changes",
       "http_path": "/v1/agent/changes/list",
       "mcp_tool": "siji_list_changes",
-      "description": "Discover recent canonical changes without naming candidates, or track an explicit set with a checkpoint. SIJI publication time, business event time and valid time are distinct. Missing history is explicit.",
+      "description": "Read recent published changes or track an explicit set of entities with a checkpoint.",
       "input_schema": {
         "$defs": {
           "EntityRef": {
@@ -1392,7 +1350,7 @@
       "name": "expand_graph",
       "http_path": "/v1/agent/graph/expand",
       "mcp_tool": "siji_expand_graph",
-      "description": "Explore any returned node again, in either direction and across supported chains. Traverse filters and returned-node filters are independent. Also reopens exact relationship refs or inspects edges inside an explicit node set. Structural adjacency does not prove company transactions.",
+      "description": "Explore relationships around returned entities, change direction, apply filters and reopen exact relationship references.",
       "input_schema": {
         "$defs": {
           "EntityRef": {
@@ -1916,7 +1874,7 @@
       "name": "trace_paths",
       "http_path": "/v1/agent/graph/paths",
       "mcp_tool": "siji_trace_paths",
-      "description": "Find bounded evidence-qualified graph connections with ordered waypoints, excluded nodes/edges and diverse alternatives. The agent interprets possible propagation. Paths are not causal proof; partial does not mean no path.",
+      "description": "Find bounded paths between explicit entities or toward selected entity types, with optional waypoints and exclusions.",
       "input_schema": {
         "$defs": {
           "EntityRef": {
@@ -2416,7 +2374,7 @@
       "name": "get_facts",
       "http_path": "/v1/agent/facts/get",
       "mcp_tool": "siji_get_facts",
-      "description": "Reopen exact fact_ids or inspect qualified facts for explicit entities. Preserve status, inference, time, scope, conflicts and citations. A seen node ID does not grant all of its facts.",
+      "description": "Read qualified facts for explicit entities or reopen exact fact IDs with status, time, scope and citations.",
       "input_schema": {
         "$defs": {
           "EntityRef": {
@@ -2779,7 +2737,7 @@
       "name": "get_evidence",
       "http_path": "/v1/agent/evidence/get",
       "mcp_tool": "siji_get_evidence",
-      "description": "Reopen fact/relationship citations or exact source-version references. Citation permissions and source-content permissions are separate. Do not guess source URLs or treat metadata as full-text authorization.",
+      "description": "Read evidence and source references behind facts or relationships, subject to source permissions.",
       "input_schema": {
         "$defs": {
           "RelationshipRef": {
@@ -3153,7 +3111,7 @@
       "name": "compare",
       "http_path": "/v1/agent/compare",
       "mcp_tool": "siji_compare",
-      "description": "Align explicit candidates' qualified commercial facts without choosing an investment winner. Missing values are unknown, not zero; periods and units remain explicit.",
+      "description": "Align selected entities across the requested dimensions while preserving units, periods, evidence state and missing values.",
       "input_schema": {
         "$defs": {
           "EntityRef": {
@@ -3486,10 +3444,8 @@
     }
   ],
   "interpretation": [
-    "The caller plans the research; no industry(question) conversion occurs.",
-    "Returned reference IDs are counted as disclosure, even inside paths and frontier metadata.",
-    "Request work limits do not ban recursive traversal or BFS.",
-    "Rights restrictions, commercial quota, work limits and abuse decisions are distinct.",
-    "Unsupported evidence, absent paths and partial coverage must remain visible as uncertainty."
+    "Use returned references for follow-up calls instead of reconstructing identifiers.",
+    "Keep evidence, coverage and conflict states attached to the facts or relationships they describe.",
+    "Use returned cursors unchanged when continuing a paginated result."
   ]
 }

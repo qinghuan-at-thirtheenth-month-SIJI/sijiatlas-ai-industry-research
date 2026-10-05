@@ -1,7 +1,13 @@
 # China AI Research Questions
 
-SIJI can organize China AI-industry research with the same evidence model while keeping market, source and usage context explicit.
+SIJI can be used to research Chinese AI companies and products with the same company → product → position → fact → evidence structure used elsewhere.
 
-Typical questions include which listed/private companies participate through a specific AI-infrastructure product, what official disclosures actually say, which market-theme labels have not been upgraded to verified industry positions, and which capacity/order/delivery/revenue facts are directly evidenced.
+Typical questions:
 
-Current public showcase coverage is deliberately narrow and must not be read as a complete map of China AI companies.
+- Which companies participate in a specific AI-infrastructure product layer?
+- What products or businesses are linked to a company?
+- What official sources describe commercialization, capacity, orders, shipment, or delivery?
+- Which facts changed recently?
+- Which Chinese products connect to global upstream or downstream positions?
+
+Entity aliases and stable IDs help connect Chinese and English company/product names across research calls.

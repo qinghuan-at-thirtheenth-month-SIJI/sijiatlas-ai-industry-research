@@ -1,11 +1,14 @@
 # AI Industry Research Questions
 
-Use this route when the starting point is an industry, product family, technology or AI-infrastructure theme.
+Use this route when the starting point is an industry, product family, technology, or AI-infrastructure theme.
 
-Good-fit questions include: what products and positions exist in the current scope; which products connect multiple complete supply chains; which companies participate through a specific product/business; which relations are structural versus direct business relations; and what changed recently.
+Typical questions:
 
-A useful result should preserve a bounded scope, stable identities, products/positions, participating companies, facts/relations, evidence, sources, unknowns/conflicts and explicit coverage.
+- What products and positions are visible in the current SIJI snapshot?
+- Which products connect multiple industry positions?
+- Which companies participate through a specific product or business?
+- Which upstream, downstream, adjacent, or alternative routes are connected?
+- Which facts and sources describe recent commercialization?
+- What changed recently?
 
-A common end demand does not create a direct supplier/customer relation. A company being “AI-related” does not establish a specific product, mass-production, order or revenue fact.
-
-See [the real training-software example](../examples/training-software.md).
+For a broad question, start with `get_world_overview`, then continue from the returned product, company, position, and relationship references.
