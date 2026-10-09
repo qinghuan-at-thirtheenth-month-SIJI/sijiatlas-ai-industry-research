@@ -17,6 +17,7 @@ Use it when ordinary Web research becomes fragmented and you need to move betwee
 
 ## Start here
 
+- **SIJI website and API Console:** [sijiatlas.com](https://sijiatlas.com)
 - **Researchers:** [Human guide](docs/human-guide.md)
 - **AI agents:** [Agent guide](docs/agent-guide.md)
 - **Research API:** [API guide](docs/research-api.md)
